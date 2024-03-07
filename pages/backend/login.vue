@@ -1,6 +1,5 @@
 <template>
     <section>
-        <!-- <toast message="Test Krub" status="error"/> -->
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto my-5 lg:py-0">
             <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0 ">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -34,6 +33,7 @@
                         <p class="text-sm font-light text-gray-500 ">
                             Don’t have an account yet? <nuxt-link to="/register"
                                 class="font-medium text-blue-600 hover:underline">Register</nuxt-link>
+                            {{ authStore.isLoggedIn }}
                         </p>
 
                     </form>
@@ -49,8 +49,9 @@ import { useAuthStore } from '@/store/auth';
 const router = useRouter()
 const authStore = useAuthStore()
 
-if (authStore.isLoggedIn) {
-    router.push('/');
+await authStore.pretected()
+if (await authStore.isLoggedIn) {
+    router.push('/backend');
 }
 const users = ref({
     email: "",
@@ -60,7 +61,7 @@ const users = ref({
 const login = async () => {
     await authStore.login(users.value)
     if (authStore.isLoggedIn) {
-        router.push("/")
+        router.push("/backend")
     }
 }
 </script>

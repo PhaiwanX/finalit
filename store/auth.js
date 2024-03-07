@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import Swal from "sweetalert2";
-
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -17,7 +16,6 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null,
     isLoggedIn: false,
-    reset: false,
   }),
   actions: {
     async pretected() {
@@ -79,52 +77,6 @@ export const useAuthStore = defineStore("auth", {
         }
       } catch (error) {}
     },
-    async resetPassword({ email }) {
-      try {
-        const response = await useFetch("/api/password/reset", {
-          method: "POST",
-          body: { email },
-        });
-
-        if (response.data.value.code === "SUCCESS") {
-          Toast.fire({
-            text: response.data.value.message,
-            icon: "success",
-          });
-        } else {
-          Toast.fire({
-            text: response.data.value.message,
-            icon: "error",
-          });
-        }
-      } catch (error) {}
-    },
-    async confirmResetPassword({ reset_token, password, confirm_password }) {
-      try {
-        const response = await useFetch("/api/password", {
-          method: "POST",
-          body: { reset_token, password, confirm_password },
-        });
-
-        if (response.data.value.code === "SUCCESS") {
-          Toast.fire({
-            text: response.data.value.message,
-            icon: "success",
-          });
-        } else {
-          this.reset = true;
-          Toast.fire({
-            text: response.data.value.message,
-            icon: "error",
-          });
-        }
-      } catch (error) {
-        Toast.fire({
-          text: error,
-          icon: "error",
-        });
-      }
-    },
     async register({ username, email, password, confirm_password }) {
       try {
         if (password !== confirm_password) {
@@ -162,7 +114,7 @@ export const useAuthStore = defineStore("auth", {
         });
       }
     },
-    async logout() {
+    async logout(router) {
       Swal.fire({
         title: "ระบบ!",
         text: "แน่ใจไหมว่าต้องการออกจากระบบ",
@@ -179,7 +131,7 @@ export const useAuthStore = defineStore("auth", {
           this.token = "";
           localStorage.removeItem("token");
           useCookie("token").value = null;
-
+          router.push("/");
           Toast.fire({
             text: "ออกจากระบบแล้ว",
             icon: "success",

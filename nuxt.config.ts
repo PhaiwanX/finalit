@@ -23,10 +23,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/google-fonts",
     '@pinia/nuxt',
+    'usebootstrap',
   ],
   googleFonts: {
     families: {

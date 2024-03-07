@@ -17,7 +17,6 @@ export default defineEventHandler(async (event) => {
         return {
             code: "ERROR",
             message: "Username already exists.",
-            existingUser
         };
     }
 
