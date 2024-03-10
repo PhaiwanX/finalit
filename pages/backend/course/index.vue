@@ -1,9 +1,9 @@
 <template>
 
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 space-x-2">
-        <div v-for="(item, key) in courses" :key="key" 
-        class="bg-white rounded-md p-8 flex justify-center items-center border-2 hover:border-blue-400 cursor-pointer hover:text-blue-600">
-            <span class="font-bold text-2xl">{{ item.title }} {{ item.class }}</span><br>
+        <div v-for="(item, key) in courses" :key="key" @click="edit(item._id)"
+            class="bg-white rounded-md p-8 flex justify-center items-center border-2 hover:border-blue-400 cursor-pointer hover:text-blue-600">
+            <span class="font-bold text-2xl">{{ item.title }}</span><br>
             <!-- <span class="text-gray-700">{{ item.description }}</span> -->
             <!-- {{ item }} -->
         </div>
@@ -13,9 +13,14 @@
 <script setup>
 import { ref } from 'vue';
 
+
 definePageMeta({
     layout: 'backend'
 });
+
+const edit = (id) => {
+    navigateTo(`/backend/course/${id}/edit`)
+}
 
 const courses = ref([]);
 

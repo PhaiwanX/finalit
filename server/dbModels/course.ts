@@ -2,34 +2,37 @@ import mongoose, { Document } from "mongoose";
 import bcrypt from "mongoose-bcrypt";
 
 interface CourseSubject {
-    code: string;
+    code: string | null;
     name: string;
 }
 
 interface Course {
+    no: Number,
     title: string;
-    subject: CourseSubject[];
+    subjects: CourseSubject[];
 }
 
 interface courseDocument extends Document {
     title: string;
     description: string;
-    course: Course[];
+    term: Course[];
 }
 
 const courseSchema = new mongoose.Schema<courseDocument>(
     {
         title: String,
         description: String,
-        course: [
+        term: [
             {
+                no: Number,
                 title: String,
-                subject: [
+                subjects: [
                     {
                         code: String,
                         name: String
                     }
                 ]
+
             }
         ]
     },
