@@ -37,7 +37,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     mongoUrl: process.env.MONGO_URL,
-    secret: process.env.SECRET,
+    secret: process.env.SECRET_KEY,
   },
 
 })

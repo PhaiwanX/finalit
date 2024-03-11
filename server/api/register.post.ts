@@ -2,6 +2,7 @@
 import { createHash } from "crypto";
 import jwt from "jsonwebtoken";
 import { User } from "../dbModels";
+const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
     const { username, email, password, name, lastname } = await readBody(event);
@@ -28,7 +29,7 @@ export default defineEventHandler(async (event) => {
         };
     }
 
-    const salt = process.env.SECRET_KEY || '';
+    const salt = config.secret || '';
     const hashPassword = createHash('sha256')
         .update(password + salt)
         .digest('hex');
@@ -46,7 +47,7 @@ export default defineEventHandler(async (event) => {
 
     await newUser.save();
 
-    const token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY || '', {
+    const token = jwt.sign({ userId: newUser._id }, config.secret || '', {
         expiresIn: "1d",
     });
 

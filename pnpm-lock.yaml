@@ -11,6 +11,9 @@ dependencies:
   '@pinia/nuxt':
     specifier: ^0.5.1
     version: 0.5.1(vue@3.4.21)
+  dotenv:
+    specifier: ^16.4.5
+    version: 16.4.5
   jsonwebtoken:
     specifier: ^9.0.2
     version: 9.0.2

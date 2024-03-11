@@ -2,6 +2,7 @@
 import { createHash } from "crypto";
 import jwt from "jsonwebtoken";
 import { User } from "../dbModels/";
+const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event: any) => {
     try {
@@ -38,7 +39,7 @@ export default defineEventHandler(async (event: any) => {
 });
 
 function hashPassword(password: string): string {
-    const salt = process.env.SECRET_KEY || '';
+    const salt = config.secret || '';
     return createHash('sha256')
         .update(password + salt)
         .digest('hex');
@@ -46,5 +47,5 @@ function hashPassword(password: string): string {
 
 function generateToken(userId: string): string {
     const expiresIn = "1d";
-    return jwt.sign({ userId }, process.env.SECRET_KEY || '', { expiresIn });
+    return jwt.sign({ userId }, config.secret || '', { expiresIn });
 }

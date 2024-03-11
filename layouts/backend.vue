@@ -58,6 +58,11 @@ const sideItems = [
         icon: 'fas fa-graduation-cap',
         link: '/backend/course'
     },
+    {
+        text: 'ข้อความ',
+        icon: 'fas fa-envelope',
+        link: '/backend/mail'
+    },
 ]
 
 </script>

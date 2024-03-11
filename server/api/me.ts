@@ -1,5 +1,6 @@
-import { User } from "../dbModels";
 import jwt from "jsonwebtoken";
+import { User } from "../dbModels";
+const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
     const { authorization } = event.req.headers;
@@ -13,7 +14,7 @@ export default defineEventHandler(async (event) => {
             };
         }
 
-        const decoded = jwt.verify(token, `${process.env.SECRET_KEY}`);
+        const decoded = jwt.verify(token, `${config.secret}`);
         const userData = await User.findOne({ _id: decoded.userId }, { __v: 0, u_password: 0 });
         if (!userData) {
             return {

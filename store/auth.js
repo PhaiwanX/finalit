@@ -49,26 +49,22 @@ export const useAuthStore = defineStore("auth", {
               authorization: `Bearer ${response.data.value.token}`,
             },
           });
-          if (user.data.value.code === "SUCCESS") {
+          if (user.data.value.code == "SUCCESS") {
             this.user = user.data.value.data;
             this.isLoggedIn = true;
             useCookie("token").value = response.data.value.token;
             localStorage.setItem("token", response.data.value.token);
-            // Swal.fire({
-            //
-            //     text: 'เข้าสู่ระบบเรียบร้อย',
-            //     icon: 'success',
-            // })
             Toast.fire({
               icon: "success",
               title: "เข้าสู่ระบบเรียบร้อย",
             });
           } else {
             Toast.fire({
-              text: response.data.value.message,
+              text: response.data.value.message + "asd",
               icon: "error",
             });
           }
+          // Toast.fire({ text: user.data.value.message });
         } else {
           Toast.fire({
             text: response.data.value.message,

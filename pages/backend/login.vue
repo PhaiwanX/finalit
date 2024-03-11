@@ -20,21 +20,9 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 "
                                 required>
                         </div>
-                        <div class="flex items-center my-2 justify-between">
-                            <div class="flex items-start">
-                            </div>
-                            <nuxt-link to="/reset-password"
-                                class="text-sm font-medium text-blue-600 hover:underline ">Forgot
-                                password?</nuxt-link>
-                        </div>
                         <button type="submit"
                             class="w-full my-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                             Login</button>
-                        <p class="text-sm font-light text-gray-500 ">
-                            Don’t have an account yet? <nuxt-link to="/register"
-                                class="font-medium text-blue-600 hover:underline">Register</nuxt-link>
-                            {{ authStore.isLoggedIn }}
-                        </p>
 
                     </form>
                 </div>

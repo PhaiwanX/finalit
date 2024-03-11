@@ -1,7 +1,7 @@
-import { Hero } from "../../../dbModels";
-import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'fs';
 import * as path from 'path';
+import { v4 as uuidv4 } from 'uuid';
+import { Hero } from "../../../dbModels";
 
 interface FormDataItem {
     name: string;
